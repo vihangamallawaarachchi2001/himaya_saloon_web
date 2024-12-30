@@ -45,6 +45,7 @@
                 />
                 <span class="absolute inset-y-0 left-3 flex items-center">
                   <lucide-icon
+                    [img]="Mail"
                     name="mail"
                     class="w-5 h-5 text-gray-400"
                   ></lucide-icon>
@@ -70,6 +71,7 @@
                 />
                 <span class="absolute inset-y-0 left-3 flex items-center">
                   <lucide-icon
+                    [img]="Lock"
                     name="lock"
                     class="w-5 h-5 text-gray-400"
                   ></lucide-icon>
@@ -92,14 +94,15 @@
           <a href="#" class="block text-sm text-pink-600 hover:underline">
             Forgot password?
           </a>
-          <p class="text-sm text-gray-600 mt-2">
+          <p class="text-sm text-gray-600 mt-2 cursor-pointer" routerLink="/signup">
             Don’t have an account?
-            <a href="#" class="text-pink-600 font-medium hover:underline">
+            <span class="text-pink-600 font-medium hover:underline">
               Sign up
-            </a>
+            </span>
           </p>
         </div>
       </div>
     </div>
   </div>
+<router-outlet></router-outlet>
   

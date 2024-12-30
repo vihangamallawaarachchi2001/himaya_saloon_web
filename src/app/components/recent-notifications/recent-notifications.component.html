@@ -1,45 +1,74 @@
 <!-- card -->
-<div>
+<div class="p-6 bg-white shadow-lg rounded-lg space-y-6 mt-10 lg:mt-0 min-w-[375px] w-[100%]">
   <!-- card header -->
-  <div>
-    <h1 class="">Notifications</h1>
+  <div class="flex items-center justify-between border-b pb-4">
+    <h1 class="text-xl font-bold text-pink-700">Notifications</h1>
+    <button
+      class="text-sm text-pink-600 hover:text-pink-700 hover:underline focus:outline-none"
+    >
+      Clear All
+    </button>
   </div>
   <ul class="space-y-4">
-    <li class="flex items-center space-x-4 border-b pb-2">
-      <div className="bg-pink-100 p-2 rounded-full">
-        <lucide-icon [img]="BellIcon" className="h-4 w-4 text-pink-600" />
+    <li class="flex items-center space-x-4 border-b pb-4">
+      <div class="bg-pink-100 p-3 rounded-full">
+        <lucide-icon [img]="BellIcon" class="h-5 w-5 text-pink-600"></lucide-icon>
       </div>
       <div>
-        <p className="font-semibold">New promotion available!</p>
-        <p className="text-sm text-gray-500">Check out our summer specials.</p>
+        <p class="font-semibold text-gray-800">New promotion available!</p>
+        <p class="text-sm text-gray-500">Check out our summer specials.</p>
       </div>
+      <button
+        class="text-sm text-gray-400 hover:text-red-500 focus:outline-none"
+        title="Dismiss"
+      >
+        <lucide-icon [img]="XIcon" class="h-4 w-4"></lucide-icon>
+      </button>
     </li>
-    <li class="flex items-center space-x-4 border-b pb-2">
-      <div className="bg-pink-100 p-2 rounded-full">
-        <lucide-icon [img]="BellIcon" className="h-4 w-4 text-pink-600" />
+    <li class="flex items-center space-x-4 border-b pb-4">
+      <div class="bg-pink-100 p-3 rounded-full">
+        <lucide-icon [img]="BellIcon" class="h-5 w-5 text-pink-600"></lucide-icon>
       </div>
       <div>
-        <p className="font-semibold">New promotion available!</p>
-        <p className="text-sm text-gray-500">Check out our summer specials.</p>
+        <p class="font-semibold text-gray-800">Service Reminder</p>
+        <p class="text-sm text-gray-500">Your haircut appointment is tomorrow.</p>
       </div>
+      <button
+        class="text-sm text-gray-400 hover:text-red-500 focus:outline-none"
+        title="Dismiss"
+      >
+        <lucide-icon [img]="XIcon" class="h-4 w-4"></lucide-icon>
+      </button>
     </li>
-    <li class="flex items-center space-x-4 border-b pb-2">
-      <div className="bg-pink-100 p-2 rounded-full">
-        <lucide-icon [img]="BellIcon" className="h-4 w-4 text-pink-600" />
+    <li class="flex items-center space-x-4 border-b pb-4">
+      <div class="bg-pink-100 p-3 rounded-full">
+        <lucide-icon [img]="BellIcon" class="h-5 w-5 text-pink-600"></lucide-icon>
       </div>
       <div>
-        <p className="font-semibold">New promotion available!</p>
-        <p className="text-sm text-gray-500">Check out our summer specials.</p>
+        <p class="font-semibold text-gray-800">System Update</p>
+        <p class="text-sm text-gray-500">Our app just got better! Check out the new features.</p>
       </div>
+      <button
+        class="text-sm text-gray-400 hover:text-red-500 focus:outline-none"
+        title="Dismiss"
+      >
+        <lucide-icon [img]="XIcon" class="h-4 w-4"></lucide-icon>
+      </button>
     </li>
-    <li class="flex items-center space-x-4 border-b pb-2">
-      <div className="bg-pink-100 p-2 rounded-full">
-        <lucide-icon [img]="BellIcon" className="h-4 w-4 text-pink-600" />
+    <li class="flex items-center space-x-4">
+      <div class="bg-pink-100 p-3 rounded-full">
+        <lucide-icon [img]="BellIcon" class="h-5 w-5 text-pink-600"></lucide-icon>
       </div>
       <div>
-        <p className="font-semibold">New promotion available!</p>
-        <p className="text-sm text-gray-500">Check out our summer specials.</p>
+        <p class="font-semibold text-gray-800">Limited Time Offer</p>
+        <p class="text-sm text-gray-500">Get 20% off on our hair care products this week.</p>
       </div>
+      <button
+        class="text-sm text-gray-400 hover:text-red-500 focus:outline-none"
+        title="Dismiss"
+      >
+        <lucide-icon [img]="XIcon" class="h-4 w-4"></lucide-icon>
+      </button>
     </li>
   </ul>
 </div>

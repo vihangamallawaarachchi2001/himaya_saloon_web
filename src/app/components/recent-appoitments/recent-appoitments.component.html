@@ -1,50 +1,84 @@
-<!-- card -->
- <div>
-    <!-- card header -->
-     <div>
-        <h1 class="">Recent Appointment</h1>
-     </div>
-     <ul class="space-y-4">
-        <li key={index} className="flex items-center justify-between border-b pb-2">
-            <div>
-              <p className="font-semibold">Haircut and Style</p>
-              <p className="text-sm text-gray-500">with Emma Thompson</p>
-            </div>
-            <div className="flex items-center">
-              <lucide-icon [img]="CalendarIcon"  className="mr-2 h-4 w-4 text-pink-600" />
-              <span>May 15, 2023</span>
-            </div>
-          </li>
-        <li key={index} className="flex items-center justify-between border-b pb-2">
-            <div>
-              <p className="font-semibold">Haircut and Style</p>
-              <p className="text-sm text-gray-500">with Emma Thompson</p>
-            </div>
-            <div className="flex items-center">
-              <lucide-icon [img]="CalendarIcon"  className="mr-2 h-4 w-4 text-pink-600" />
-              <span>May 15, 2023</span>
-            </div>
-          </li>
-        <li key={index} className="flex items-center justify-between border-b pb-2">
-            <div>
-              <p className="font-semibold">Haircut and Style</p>
-              <p className="text-sm text-gray-500">with Emma Thompson</p>
-            </div>
-            <div className="flex items-center">
-              <lucide-icon [img]="CalendarIcon"  className="mr-2 h-4 w-4 text-pink-600" />
-              <span>May 15, 2023</span>
-            </div>
-          </li>
-        <li key={index} className="flex items-center justify-between border-b pb-2">
-            <div>
-              <p className="font-semibold">Haircut and Style</p>
-              <p className="text-sm text-gray-500">with Emma Thompson</p>
-            </div>
-            <div className="flex items-center">
-              <lucide-icon [img]="CalendarIcon"  className="mr-2 h-4 w-4 text-pink-600" />
-              <span>May 15, 2023</span>
-            </div>
-          </li>
-     </ul>
+<!-- Card -->
+<div class="p-6 bg-white rounded-lg shadow-lg max-w-3xl mx-auto space-y-4 mt-10 min-w-96 w-full">
+  <!-- Card Header -->
+  <div class="border-b pb-4">
+    <h1 class="text-2xl font-bold text-pink-700">Recent Appointments</h1>
+  </div>
 
- </div>
+  <!-- Appointments List -->
+  <ul class="space-y-4 divide-y divide-gray-200">
+    <!-- Appointment Item -->
+    <li class="flex items-center justify-between py-4">
+      <!-- Appointment Details -->
+      <div>
+        <p class="font-semibold text-lg text-gray-800">Haircut and Style</p>
+        <p class="text-sm text-gray-500">with Emma Thompson</p>
+      </div>
+      <!-- Appointment Date -->
+      <div class="flex items-center text-gray-600">
+        <lucide-icon [img]="CalendarIcon" class="mr-2 h-5 w-5 text-pink-600"></lucide-icon>
+        <span class="text-sm font-medium">May 15, 2023</span>
+      </div>
+    </li>
+
+    <!-- Appointment Item -->
+    <li class="flex items-center justify-between py-4">
+      <div>
+        <p class="font-semibold text-lg text-gray-800">Hair Treatment</p>
+        <p class="text-sm text-gray-500">with Sarah Lee</p>
+      </div>
+      <div class="flex items-center text-gray-600">
+        <lucide-icon [img]="CalendarIcon" class="mr-2 h-5 w-5 text-pink-600"></lucide-icon>
+        <span class="text-sm font-medium">June 10, 2023</span>
+      </div>
+    </li>
+
+    <!-- Appointment Item -->
+    <li class="flex items-center justify-between py-4">
+      <div>
+        <p class="font-semibold text-lg text-gray-800">Color Correction</p>
+        <p class="text-sm text-gray-500">with John Smith</p>
+      </div>
+      <div class="flex items-center text-gray-600">
+        <lucide-icon [img]="CalendarIcon" class="mr-2 h-5 w-5 text-pink-600"></lucide-icon>
+        <span class="text-sm font-medium">July 5, 2023</span>
+      </div>
+    </li>
+
+    <!-- Appointment Item -->
+    <li class="flex items-center justify-between py-4">
+      <div>
+        <p class="font-semibold text-lg text-gray-800">Scalp Treatment</p>
+        <p class="text-sm text-gray-500">with Kate Wilson</p>
+      </div>
+      <div class="flex items-center text-gray-600">
+        <lucide-icon [img]="CalendarIcon" class="mr-2 h-5 w-5 text-pink-600"></lucide-icon>
+        <span class="text-sm font-medium">August 15, 2023</span>
+      </div>
+    </li>
+
+    <!-- Appointment Item -->
+    <li class="flex items-center justify-between py-4">
+      <div>
+        <p class="font-semibold text-lg text-gray-800">Scalp Treatment</p>
+        <p class="text-sm text-gray-500">with Kate Wilson</p>
+      </div>
+      <div class="flex items-center text-gray-600">
+        <lucide-icon [img]="CalendarIcon" class="mr-2 h-5 w-5 text-pink-600"></lucide-icon>
+        <span class="text-sm font-medium">August 15, 2023</span>
+      </div>
+    </li>
+
+    <!-- Appointment Item -->
+    <li class="flex items-center justify-between py-4">
+      <div>
+        <p class="font-semibold text-lg text-gray-800">Scalp Treatment</p>
+        <p class="text-sm text-gray-500">with Kate Wilson</p>
+      </div>
+      <div class="flex items-center text-gray-600">
+        <lucide-icon [img]="CalendarIcon" class="mr-2 h-5 w-5 text-pink-600"></lucide-icon>
+        <span class="text-sm font-medium">August 15, 2023</span>
+      </div>
+    </li>
+  </ul>
+</div>

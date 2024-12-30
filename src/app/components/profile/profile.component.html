@@ -1,24 +1,50 @@
-<!-- profile card -->
-<div class="space-y-8">
-    <!-- card -->
-     <div>
-        <!-- card header -->
-         <div>
-            <h1>My Profile</h1>
-         </div>
-         <!-- card contet -->
-          <div class="flex items-center space-x-8">
-            <img src="/login_portal//placeholder.svg" alt="profile image" class="w-52 h-52 rounded-full">
-            <div>
-                <h3 class="text-2xl font-semibold">Imalsha Wijeekon</h3>
-                <p class="text-gray-500">Premium Member</p>
-                <div>
-                    <p class="flex items-center"><lucide-icon [img]="MailIcon" class="mr-2 h-4 w-4" /> imalshawijekoon8&#64;gmail.com</p>
-                    <p class="flex items-center"><lucide-icon  [img]="PhoneIcon" class="mr-2 h-4 w-4" /> (555) 123-4567</p>
-                    <p class="flex items-center"><lucide-icon [img]="MapPinIcons" class="mr-2 h-4 w-4" /> New York, NY</p>
-                </div>
-                <button type="button" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white">Edit Profile</button>
-            </div>
-          </div>
-     </div>
-</div>
+<!-- Profile Card -->
+<div class="space-y-8 p-6 bg-white rounded-lg shadow-lg max-w-4xl mx-auto min-w-[375px]">
+    <!-- Card Header -->
+    <div class="border-b pb-4 mb-6">
+      <h1 class="text-3xl font-bold text-pink-700">My Profile</h1>
+    </div>
+  
+    <!-- Card Content -->
+    <div class="flex items-center space-x-8">
+      <!-- Profile Image -->
+      <img
+        src="/login_portal/placeholder.svg"
+        alt="Profile Image"
+        class="w-52 h-52 rounded-full border-4 border-pink-100 shadow-md"
+      />
+  
+      <!-- Profile Info -->
+      <div>
+        <h3 class="text-2xl font-semibold text-gray-800">Imalsha Wijeekon</h3>
+        <p class="text-sm text-gray-500 font-medium bg-pink-100 text-pink-700 inline-block px-3 py-1 rounded-full">
+          Premium Member
+        </p>
+  
+        <!-- Contact Information -->
+        <div class="mt-4 space-y-2">
+          <p class="flex items-center text-gray-700">
+            <lucide-icon [img]="MailIcon" class="mr-2 h-5 w-5 text-pink-500"></lucide-icon>
+            imalshawijekoon8&#64;gmail.com
+          </p>
+          <p class="flex items-center text-gray-700">
+            <lucide-icon [img]="PhoneIcon" class="mr-2 h-5 w-5 text-pink-500"></lucide-icon>
+            (555) 123-4567
+          </p>
+          <p class="flex items-center text-gray-700">
+            <lucide-icon [img]="MapPinIcons" class="mr-2 h-5 w-5 text-pink-500"></lucide-icon>
+            New York, NY
+          </p>
+        </div>
+  
+        <!-- Edit Profile Button -->
+        <button
+          type="button"
+          class="mt-6 px-6 py-2 bg-pink-600 text-white font-medium rounded-lg shadow hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-1 transition-all"
+        >
+          Edit Profile
+        </button>
+      </div>
+    </div>
+  </div>
+  

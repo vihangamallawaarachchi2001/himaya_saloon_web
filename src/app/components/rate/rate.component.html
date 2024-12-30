@@ -1,21 +1,30 @@
 <!-- card -->
-<div>
-    <!-- card header -->
-    <div>
-      <h1>Rate Your Last Appointment</h1>
+<div class="p-6 bg-white shadow-lg rounded-lg space-y-6 mt-10 lg:mt-0 min-w-[375px]">
+  <!-- card header -->
+  <div class="border-b pb-4">
+    <h1 class="text-xl font-bold text-pink-700">Rate Your Last Appointment</h1>
+  </div>
+  <!-- card content -->
+  <div class="space-y-6">
+    <div class="flex items-center space-x-2 justify-center">
+      <lucide-icon [img]="StarIcon" class="text-yellow-400 h-8 w-8"></lucide-icon>
+      <lucide-icon [img]="StarIcon" class="text-yellow-400 h-8 w-8"></lucide-icon>
+      <lucide-icon [img]="StarIcon" class="text-yellow-400 h-8 w-8"></lucide-icon>
+      <lucide-icon [img]="StarIcon" class="text-yellow-400 h-8 w-8"></lucide-icon>
+      <lucide-icon [img]="StarHalfIcon" class="text-yellow-400 h-8 w-8"></lucide-icon>
     </div>
-    <!-- card content -->
-    <div>
-      <div className="space-y-4">
-        <div className="flex items-center space-x-2">
-          <lucide-icon [img]="StarIcon" className="text-yellow-400 h-6 w-6" />
-          <lucide-icon [img]="StarIcon" className="text-yellow-400 h-6 w-6" />
-          <lucide-icon [img]="StarIcon" className="text-yellow-400 h-6 w-6" />
-          <lucide-icon [img]="StarIcon" className="text-yellow-400 h-6 w-6" />
-          <lucide-icon [img]="StarHalfIcon" className="text-yellow-400 h-6 w-6" />
-        </div>
-        <textarea placeholder="Share your experience..." ></textarea>
-        <Button className="bg-pink-600 hover:bg-pink-700 text-white">Submit Rating</Button>
-      </div>
+    <textarea 
+      placeholder="Share your experience..." 
+      rows="4"
+      class="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-pink-600 focus:outline-none resize-none"
+    ></textarea>
+    <div class="text-center">
+      <button 
+        type="button" 
+        class="bg-pink-600 hover:bg-pink-700 text-white py-2 px-6 rounded-lg font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-600"
+      >
+        Submit Rating
+      </button>
     </div>
   </div>
+</div>

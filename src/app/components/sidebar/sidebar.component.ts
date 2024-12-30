@@ -5,7 +5,7 @@ import { LucideAngularModule, Home, User, Calendar, MessageSquare, Sparkles, Sho
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterOutlet, LucideAngularModule,NgFor, RouterLink],
+  imports: [ LucideAngularModule,NgFor, RouterLink],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })

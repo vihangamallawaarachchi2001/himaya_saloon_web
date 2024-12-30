@@ -9,41 +9,28 @@ import { AiHairRecommendationsComponent } from './pages/ai-hair-recommendations/
 import { ProductsComponent } from './pages/products/products.component';
 
 export const routes: Routes = [
-    {
-        path:'',
-        redirectTo:'login',
-        pathMatch: 'full'
-    },
-    {
-        path: 'signup',
-        component:SignupComponent
-    },
-    {
-        path: 'login',
-        component:LoginComponent
-    },
-    {
-        path: 'dashboard',
-        component: UserLayoutComponent,
-        children: [
-            { path: '', component: DashboardComponent},
-            {
-                path: '/appointments',
-                component: AppointmentsComponent
-            },
-            {
-                path: '/chat',
-                component: ChatWithExpertComponent,
-            }, 
-            {
-                path: '/ai',
-                component: AiHairRecommendationsComponent,
-            },
-            {
-                path: '/products',
-                component: ProductsComponent,
-            },
-
-        ]
-    }
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
+  },
+  {
+    path: 'dashboard',
+    component: UserLayoutComponent,
+    children: [
+      { path: '', component: DashboardComponent },
+      { path: 'appointments', component: AppointmentsComponent },
+      { path: 'chat', component: ChatWithExpertComponent },
+      { path: 'ai', component: AiHairRecommendationsComponent },
+      { path: 'products', component: ProductsComponent },
+    ],
+  },
 ];

@@ -1,1 +1,148 @@
-<p>signup works!</p>
+<div class="min-h-screen bg-gradient-to-r from-pink-100 to-purple-100 flex items-center justify-center p-4">
+    <div
+      class="w-full max-w-4xl bg-white/80 backdrop-blur-sm rounded-lg shadow-lg flex overflow-hidden"
+    >
+      <!-- Left Section: Image -->
+      <div class="w-1/2 relative hidden md:block">
+        <img
+          src="/login_portal/placeholder.svg"
+          alt="Salon Interior"
+          class="w-full h-full object-cover"
+        />
+      </div>
+  
+      <!-- Right Section: Form -->
+      <div class="w-full md:w-1/2 p-8">
+        <!-- Card Header -->
+        <div class="text-center space-y-3">
+          <div class="flex justify-center">
+            <lucide-icon
+              [img]="ScissorsIcon"
+              name="scissors"
+              class="h-12 w-12 text-pink-500"
+            ></lucide-icon>
+          </div>
+          <h1 class="text-4xl font-bold text-pink-700">Join Himaya Saloon</h1>
+          <p class="text-sm text-gray-600">Create your account</p>
+        </div>
+  
+        <!-- Card Content -->
+        <div class="mt-6">
+          <form class="space-y-6">
+            <!-- Full Name Field -->
+            <div class="space-y-2">
+              <label
+                for="full-name"
+                class="block text-sm font-medium text-gray-700"
+                >Full Name</label
+              >
+              <div class="relative">
+                <input
+                  type="text"
+                  name="full-name"
+                  id="full-name"
+                  placeholder="Your Name"
+                  required
+                  class="w-full border border-gray-300 rounded-lg p-3 pl-10 shadow-md focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-pink-300"
+                />
+                <span class="absolute inset-y-0 left-3 flex items-center">
+                  <lucide-icon
+                    [img]="UserIcon"
+                    name="user"
+                    class="w-5 h-5 text-gray-400"
+                  ></lucide-icon>
+                </span>
+              </div>
+            </div>
+  
+            <!-- Email Field -->
+            <div class="space-y-2">
+              <label for="email" class="block text-sm font-medium text-gray-700"
+                >Email Address</label
+              >
+              <div class="relative">
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="m@example.com"
+                  required
+                  class="w-full border border-gray-300 rounded-lg p-3 pl-10 shadow-md focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-pink-300"
+                />
+                <span class="absolute inset-y-0 left-3 flex items-center">
+                  <lucide-icon
+                    [img]="MailIcon"
+                    name="mail"
+                    class="w-5 h-5 text-gray-400"
+                  ></lucide-icon>
+                </span>
+              </div>
+            </div>
+  
+            <!-- Password Field -->
+            <div class="space-y-2">
+              <label
+                for="password"
+                class="block text-sm font-medium text-gray-700"
+                >Password</label
+              >
+              <div class="relative">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="••••••••"
+                  required
+                  class="w-full border border-gray-300 rounded-lg p-3 pl-10 shadow-md focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-pink-300"
+                />
+                <span class="absolute inset-y-0 left-3 flex items-center">
+                  <lucide-icon
+                    [img]="LockIcon"
+                    name="lock"
+                    class="w-5 h-5 text-gray-400"
+                  ></lucide-icon>
+                </span>
+              </div>
+            </div>
+  
+            <!-- Remember Me Checkbox -->
+            <div class="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="remember-me"
+                name="remember-me"
+                class="h-4 w-4 text-pink-600 border-gray-300 rounded focus:ring-pink-500"
+              />
+              <label for="remember-me" class="text-sm text-gray-600">
+                Remember Me
+              </label>
+            </div>
+  
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="w-full bg-pink-600 text-white font-medium py-3 rounded-lg shadow-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500"
+            >
+              Sign Up
+            </button>
+          </form>
+        </div>
+  
+        <!-- Card Footer -->
+        <div class="mt-6 text-center">
+          <p class="text-sm text-gray-600">
+            Already have an account?
+            <a
+              href="#"
+              class="text-pink-600 font-medium hover:underline"
+              routerLink="/login"
+            >
+              Signin
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+  

@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    background: {
+      login_bg: '/login_portal/bg.png',
+    }
   },
   plugins: [],
 }

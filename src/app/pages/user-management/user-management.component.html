@@ -1,3 +1,12 @@
+<div class="mb-4 text-right">
+    <button
+      class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-600 transition duration-200"
+      (click)="openAddUserModal()"
+    >
+      Add User
+    </button>
+  </div>
+  
 <div class="container mx-auto mt-6 p-4 bg-white shadow-md rounded-lg">
     <h2 class="text-2xl font-semibold text-gray-800 mb-4">User Management</h2>
   
@@ -46,18 +55,18 @@
         <li>
           <button
             class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition duration-200"
-            [class.cursor-not-allowed]="currentPage === 1"
-            [class.opacity-50]="currentPage === 1"
-            (click)="changePage(currentPage - 1)"
-            [disabled]="currentPage === 1"
+            [class.cursor-not-allowed]="currentPage() === 0"
+            [class.opacity-50]="currentPage() === 0"
+            (click)="changePageByButton(currentPage() - 1)"
+            [disabled]="currentPage() === 0"
           >
             Previous
           </button>
         </li>
         <li
           *ngFor="let page of [].constructor(totalPages); let i = index"
-          [class.bg-blue-500]="currentPage === i + 1"
-          [class.text-white]="currentPage === i + 1"
+          [class.bg-pink-500]="currentPage() === i "
+          [class.text-white]="currentPage() === i "
         >
           <button
             class="px-3 py-2 border border-gray-300 rounded-md hover:bg-gray-200 transition duration-200"
@@ -69,10 +78,10 @@
         <li>
           <button
             class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition duration-200"
-            [class.cursor-not-allowed]="currentPage === totalPages"
-            [class.opacity-50]="currentPage === totalPages"
-            (click)="changePage(currentPage + 1)"
-            [disabled]="currentPage === totalPages"
+            [class.cursor-not-allowed]="currentPage() === totalPages -1"
+            [class.opacity-50]="currentPage() === totalPages -1"
+            (click)="changePageByButton(currentPage() + 1)"
+            [disabled]="currentPage() === totalPages - 1"
           >
             Next
           </button>
@@ -216,3 +225,74 @@
     </div>
   </div>
   
+
+<!-- Modal for Adding User -->
+<div
+class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50"
+*ngIf="addUserModal"
+>
+<div class="bg-white rounded-lg shadow-lg w-1/3">
+  <div class="p-4 border-b">
+    <h3 class="text-lg font-medium">Add New User</h3>
+  </div>
+  <div class="p-4">
+    <label class="block mb-2">Full Name</label>
+    <input
+      type="text"
+      class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md"
+      [(ngModel)]="newUser.fullname"
+    />
+
+    <label class="block mb-2">Email</label>
+    <input
+      type="email"
+      class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md"
+      [(ngModel)]="newUser.email"
+    />
+
+    <label class="block mb-2">Address</label>
+    <input
+      type="text"
+      class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md"
+      [(ngModel)]="newUser.address"
+    />
+
+    <label class="block mb-2">Contact</label>
+    <input
+      type="text"
+      class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md"
+      [(ngModel)]="newUser.contact"
+    />
+
+    <label class="block mb-2">Password</label>
+    <input
+      type="password"
+      class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md"
+      [(ngModel)]="newUser.password"
+    />
+
+    <label class="block mb-2">Role</label>
+    <select
+      class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md"
+      [(ngModel)]="newUser.roles"
+    >
+      <option value="USER">User</option>
+      <option value="ADMIN">Admin</option>
+    </select>
+  </div>
+  <div class="p-4 flex justify-end border-t">
+    <button
+      class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-600 transition duration-200 mr-2"
+      (click)="onSubmit()"
+    >
+      Save
+    </button>
+    <button
+      class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition duration-200"
+      (click)="addUserModal = false"
+    >
+      Cancel
+    </button>
+  </div>
+</div>
+</div>

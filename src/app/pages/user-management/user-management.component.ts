@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { NgClass, NgFor, NgIf } from '@angular/common';
@@ -17,17 +17,40 @@ export class UserManagementComponent {
   readonly X = X;
 
   users: any[] = [];
-  currentPage: number = 0;
+  currentPage = signal(0);
   totalPages: number = 1;
   searchQuery: string = '';
   isLoading: boolean = false;
   selectedUser: any = null;
   editUserModal: any = null; // Added for editing user details
+  addUserModal: boolean = false; // Flag to control the "Add User" modal visibility
+  newUser: any = { // Object to store new user details
+    fullname: '',
+    email: '',
+    address: '',
+    contact: '',
+    password: '',
+    roles: 'USER' // Default role is 'USER'
+  };
+
+  // Open the "Add User" modal
+  openAddUserModal() {
+    this.addUserModal = true;
+    this.newUser = { // Reset the form fields when opening the modal
+      fullname: '',
+      email: '',
+      address: '',
+      contact: '',
+      password: '',
+      roles: 'USER'
+    };
+    this.searchQuery = ''
+  }
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.fetchUsers(this.currentPage);
+    this.fetchUsers(this.currentPage());
   }
 
   fetchUsers(page: number) {
@@ -54,7 +77,7 @@ export class UserManagementComponent {
           user.email.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     } else {
-      this.fetchUsers(this.currentPage);
+      this.fetchUsers(this.currentPage());
     }
   }
 
@@ -69,7 +92,7 @@ export class UserManagementComponent {
         next: () => {
           alert('User deleted successfully');
           this.selectedUser = null;
-          this.fetchUsers(this.currentPage);
+          this.fetchUsers(this.currentPage());
         },
         error: () => {
           alert('Failed to delete user');
@@ -90,7 +113,7 @@ export class UserManagementComponent {
       next: () => {
         alert('User updated successfully');
         this.editUserModal = null;
-        this.fetchUsers(this.currentPage); // Refresh users
+        this.fetchUsers(this.currentPage()); // Refresh users
       },
       error: () => {
         alert('Failed to update user');
@@ -103,7 +126,42 @@ export class UserManagementComponent {
   }
 
   changePage(page: number) {
-    this.currentPage = page - 1;
-    this.fetchUsers(this.currentPage);
+    this.currentPage.set(page - 1)
+    this.fetchUsers(this.currentPage());
   }
+
+  changePageByButton(page: number) {
+    this.currentPage.set(page);  // No need for subtraction here
+    this.fetchUsers(page);
+  }
+
+
+
+      // Method to add admin role
+  addAdminRole(user: any) {
+    user.roles = 'ADMIN'; // Add 'ADMIN' role to the user
+    this.authService.updateUserById(user).subscribe({
+      next: () => {
+        alert(`${user.fullname} is now an Admin!`);
+        this.fetchUsers(this.currentPage()); // Refresh users
+      },
+      error: () => {
+        alert('Failed to update user role');
+      },
+    });
+  }
+
+  onSubmit() {
+    const userData = this.newUser;
+    this.authService.register(userData).subscribe({
+      next: (response) => {
+        this.addUserModal = false;
+      },
+      error: (error) => {
+        console.error('Registration failed', error);
+        alert('Registration failed');
+      }
+    })
+  }
+
 }

@@ -1,0 +1,218 @@
+<div class="container mx-auto mt-6 p-4 bg-white shadow-md rounded-lg">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">User Management</h2>
+  
+    <!-- Search Input -->
+    <input
+      type="text"
+      class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+      placeholder="Search users..."
+      [(ngModel)]="searchQuery"
+      (input)="searchUsers()"
+    />
+  
+    <!-- Table -->
+    <table class="w-full text-left border-collapse">
+      <thead>
+        <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+          <th class="py-3 px-4">Name</th>
+          <th class="py-3 px-4">Email</th>
+          <th class="py-3 px-4">Role</th>
+          <th class="py-3 px-4 text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-700 text-sm font-light">
+        <tr
+          *ngFor="let user of users"
+          class="border-b border-gray-200 hover:bg-gray-50"
+        >
+          <td class="py-3 px-4">{{ user.fullname }}</td>
+          <td class="py-3 px-4">{{ user.email }}</td>
+          <td class="py-3 px-4">{{ user.roles }}</td>
+          <td class="py-3 px-4 text-center">
+            <button
+              class="text-gray-400 px-3 py-1 rounded-md hover:text-gray-600 transition duration-200 text-sm"
+              (click)="viewUser(user)"
+            >
+              <lucide-icon [img]="Eye"></lucide-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Pagination -->
+    <nav class="mt-4 flex justify-center items-center">
+      <ul class="flex space-x-2">
+        <li>
+          <button
+            class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition duration-200"
+            [class.cursor-not-allowed]="currentPage === 1"
+            [class.opacity-50]="currentPage === 1"
+            (click)="changePage(currentPage - 1)"
+            [disabled]="currentPage === 1"
+          >
+            Previous
+          </button>
+        </li>
+        <li
+          *ngFor="let page of [].constructor(totalPages); let i = index"
+          [class.bg-blue-500]="currentPage === i + 1"
+          [class.text-white]="currentPage === i + 1"
+        >
+          <button
+            class="px-3 py-2 border border-gray-300 rounded-md hover:bg-gray-200 transition duration-200"
+            (click)="changePage(i + 1)"
+          >
+            {{ i + 1 }}
+          </button>
+        </li>
+        <li>
+          <button
+            class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition duration-200"
+            [class.cursor-not-allowed]="currentPage === totalPages"
+            [class.opacity-50]="currentPage === totalPages"
+            (click)="changePage(currentPage + 1)"
+            [disabled]="currentPage === totalPages"
+          >
+            Next
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  
+<!-- Modal for Viewing User Details -->
+<div
+  class="fixed inset-0 flex items-center justify-center bg-[#0000002a] bg-opacity-75 z-50"
+  *ngIf="selectedUser"
+>
+  <div class="bg-gradient-to-r relative from-pink-100 to-purple-100 rounded-xl shadow-2xl w-full max-w-lg">
+    <!-- Modal Header -->
+    <div class="bg-pink-500 text-white p-4 rounded-t-xl">
+      <h3 class="text-xl font-semibold text-center">
+        {{ selectedUser.fullname }}'s Profile
+      </h3>
+    </div>
+
+    <!-- Modal Content -->
+    <div class="p-6">
+      <!-- Profile Picture -->
+      <div class="flex justify-center mb-4">
+        <img
+          [src]="selectedUser.profilePicture || '/login_portal/placeholder.svg'"
+          alt="Profile Picture"
+          class="w-28 h-28 rounded-full border-4 border-pink-500 shadow-lg"
+        />
+      </div>
+
+      <!-- User Details -->
+      <div class="space-y-3">
+        <div class="flex items-center">
+          <span class="font-bold text-gray-700 w-1/3">Fullname:</span>
+          <span class="text-gray-800">{{ selectedUser.fullname || 'Not available' }}</span>
+        </div>
+        <div class="flex items-center">
+          <span class="font-bold text-gray-700 w-1/3">Email:</span>
+          <span class="text-gray-800">{{ selectedUser.email || 'Not available'  }}</span>
+        </div>
+        <div class="flex items-center">
+          <span class="font-bold text-gray-700 w-1/3">Address:</span>
+          <span class="text-gray-800">{{ selectedUser.address || 'Not available'  }}</span>
+        </div>
+        <div class="flex items-center">
+          <span class="font-bold text-gray-700 w-1/3">Contacts:</span>
+          <span class="text-gray-800">{{ selectedUser.contact || 'Not available'  }}</span>
+        </div>
+        <div class="flex items-center">
+          <span class="font-bold text-gray-700 w-1/3">Role:</span>
+          <span
+            class="px-2 py-1 rounded-md text-white"
+            [ngClass]="{
+              'bg-pink-300': selectedUser.roles === 'ADMIN',
+              'bg-pink-500': selectedUser.roles === 'USER'
+            }"
+          >
+            {{ selectedUser.roles }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="p-4 flex justify-end space-x-2 border-t border-t-gray-300">
+      <button
+        class="text-yellow-500 hover:text-yellow-600 px-4 py-2 transition-all duration-200"
+        *ngIf="selectedUser.roles === 'ADMIN'"
+        (click)="openEditPopup(selectedUser)"
+      >
+        <lucide-icon [img]="PaintBrush2"></lucide-icon>
+      </button>
+      <button
+        class="text-red-500 hover:text-red-600  px-4 py-2 transition-all duration-200"
+        (click)="deleteUser(selectedUser)"
+      >
+        <lucide-icon [img]="Trash2"></lucide-icon>
+      </button>
+      <button
+        class="bg-transparent text-white px-4 py-2  transition-all duration-200 absolute top-2 right-3"
+        (click)="selectedUser = null"
+      >
+        <lucide-icon [img]="X"></lucide-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+  
+  <!-- Modal for Editing User Details -->
+  <div
+    class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50"
+    *ngIf="editUserModal"
+  >
+    <div class="bg-white rounded-lg shadow-lg w-1/3">
+      <div class="p-4 border-b">
+        <h3 class="text-lg font-medium">Edit {{ editUserModal.fullname }}</h3>
+      </div>
+      <div class="p-4">
+        <label class="block mb-2">Fullname</label>
+        <input
+          type="text"
+          class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md"
+          [(ngModel)]="editUserModal.fullname"
+        />
+        <label class="block mb-2">Email</label>
+        <input
+          type="email"
+          class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md"
+          [(ngModel)]="editUserModal.email"
+        />
+        <label class="block mb-2">Address</label>
+        <input
+          type="text"
+          class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md"
+          [(ngModel)]="editUserModal.address"
+        />
+        <label class="block mb-2">Contacts</label>
+        <input
+          type="text"
+          class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md"
+          [(ngModel)]="editUserModal.contact"
+        />
+      </div>
+      <div class="p-4 flex justify-end border-t">
+        <button
+          class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-600 transition duration-200 mr-2"
+          (click)="saveUser()"
+        >
+          Save
+        </button>
+        <button
+          class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition duration-200"
+          (click)="editUserModal = null"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+  

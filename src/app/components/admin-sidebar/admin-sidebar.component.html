@@ -1,0 +1,30 @@
+<aside class="w-64 bg-white h-screen p-4 shadow-lg relative">
+    <!-- Header -->
+    <div class="flex items-center justify-center mb-8">
+      <h1 class="text-2xl font-bold text-pink-700">Himaya Saloon</h1>
+    </div>
+  
+    <!-- Navigation -->
+    <nav class="flex flex-col justify-between">
+      <ul class="space-y-2">
+        <li *ngFor="let item of navItems" class="flex">
+          <a
+            [routerLink]="item.href"
+            routerLinkActive="active"
+            class="flex items-center w-full p-2 text-gray-700 hover:bg-pink-100 rounded-md"
+          >
+            <lucide-icon [name]="item.icon" class="mr-2 h-4 w-4"></lucide-icon>
+            {{ item.label }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <button
+      type="button"
+      class="w-56 mt-96 bg-pink-600 cursor-pointer text-white font-medium py-3 rounded-lg shadow-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 absolute bottom-5"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+  </aside>
+  

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/auth/register';
@@ -13,27 +13,29 @@ export class AuthService {
   private updateUserProfileUrl = 'http://localhost:8080/api/auth';
   private deleteUserProfileUrl = 'http://localhost:8080/api/auth/delete-user';
 
-  
-  private getUsersUrl = 'http://localhost:8080/api/auth/register';
-  private updateUserUrl = 'http://localhost:8080/api/auth/register';
+  private getUsersUrl = 'http://localhost:8080/api/auth/users';
   private forgotPasswordUrl = 'http://localhost:8080/api/auth/register';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  register( userData: {email: string, password: string, fullname: string} ): Observable<any> {
+  register(userData: {
+    email: string;
+    password: string;
+    fullname: string;
+  }): Observable<any> {
     return this.http.post(this.apiUrl, userData);
-  };
+  }
 
-  login (userData: {email: string, password: string}): Observable<any> {
+  login(userData: { email: string; password: string }): Observable<any> {
     return this.http.post(this.loginUrl, userData);
   }
-  
+
   getUserProfile(): Observable<any> {
     const token = localStorage.getItem('token');
     if (token) {
       try {
-        const decodedToken: any = jwtDecode(token); 
-        const userId = decodedToken?.sub; 
+        const decodedToken: any = jwtDecode(token);
+        const userId = decodedToken?.sub;
 
         return this.http.get(`${this.getUserProfileUrl}?userId=${userId}`); // Send userId as query parameter
       } catch (error) {
@@ -44,21 +46,35 @@ export class AuthService {
     }
   }
 
-   updateUserProfile(profileData: any): Observable<any> {
+  updateUserProfile(profileData: any): Observable<any> {
     const token = localStorage.getItem('token') as string;
-    const decodedToken: any = jwtDecode(token); 
-        const userId = decodedToken?.sub; 
+    const decodedToken: any = jwtDecode(token);
+    const userId = decodedToken?.sub;
     return this.http.put(`${this.updateUserProfileUrl}/${userId}`, profileData);
   }
 
-// Delete user profile
-deleteUserProfile(): Observable<any> {
-  const token = localStorage.getItem('token') as string;
-  const decodedToken: any = jwtDecode(token); 
-  const id = decodedToken?.sub; 
+  // Delete user profile
+  deleteUserProfile(): Observable<any> {
+    const token = localStorage.getItem('token') as string;
+    const decodedToken: any = jwtDecode(token);
+    const id = decodedToken?.sub;
 
-  // Ensure `id` is passed as a query parameter
-  return this.http.delete(`${this.deleteUserProfileUrl}?id=${id}`);
-}
+    // Ensure `id` is passed as a query parameter
+    return this.http.delete(`${this.deleteUserProfileUrl}?id=${id}`);
+  }
 
+  getAllUsers(page: number, size: number): Observable<any> {
+    const url = `${this.getUsersUrl}?page=${page}&size=${size}`;
+    return this.http.get(url);
+  }
+
+    // Delete user profile
+    deleteUserById(userId: any): Observable<any> {  
+      // Ensure `id` is passed as a query parameter
+      return this.http.delete(`${this.deleteUserProfileUrl}?id=${userId.id}`);
+    }
+
+    updateUserById(profileData: any): Observable<any> {
+      return this.http.put(`${this.updateUserProfileUrl}/${profileData.id}`, profileData);
+    }
 }

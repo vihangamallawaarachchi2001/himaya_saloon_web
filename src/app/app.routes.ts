@@ -8,6 +8,9 @@ import { ChatWithExpertComponent } from './pages/chat-with-expert/chat-with-expe
 import { AiHairRecommendationsComponent } from './pages/ai-hair-recommendations/ai-hair-recommendations.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { UserManagementComponent } from './pages/user-management/user-management.component';
 
 export const routes: Routes = [
   {
@@ -38,4 +41,12 @@ export const routes: Routes = [
     path: 'unautherized_access',
     component: ForbiddenComponent
   },
+  {
+    path: 'admin-panel',
+    component: AdminLayoutComponent,
+    children: [
+      { path: '', component: AdminDashboardComponent },
+      { path: 'users', component: UserManagementComponent },
+    ],
+  }
 ];

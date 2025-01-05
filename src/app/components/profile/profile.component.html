@@ -1,50 +1,148 @@
 <!-- Profile Card -->
-<div class="space-y-8 p-6 bg-white rounded-lg shadow-lg max-w-4xl mx-auto min-w-[375px]">
-    <!-- Card Header -->
-    <div class="border-b pb-4 mb-6">
-      <h1 class="text-3xl font-bold text-pink-700">My Profile</h1>
-    </div>
-  
-    <!-- Card Content -->
-    <div class="flex items-center space-x-8">
-      <!-- Profile Image -->
-      <img
-        src="/login_portal/placeholder.svg"
-        alt="Profile Image"
-        class="w-52 h-52 rounded-full border-4 border-pink-100 shadow-md"
-      />
-  
-      <!-- Profile Info -->
-      <div>
-        <h3 class="text-2xl font-semibold text-gray-800">Imalsha Wijeekon</h3>
-        <p class="text-sm text-gray-500 font-medium bg-pink-100 text-pink-700 inline-block px-3 py-1 rounded-full">
-          Premium Member
+<div
+  *ngIf="!isEditModalOpen"
+  class="space-y-8 p-6 bg-white rounded-lg shadow-lg max-w-5xl mx-auto min-w-[375px]"
+>
+  <!-- Card Header -->
+  <div class="border-b pb-4 mb-6 relative">
+    <h1 class="text-3xl font-bold text-pink-700">My Profile</h1>
+    <lucide-icon [img]="X" class="absolute top-1 right-3 text-pink-400 " (click)="handleCloseProfile()"></lucide-icon>
+  </div>
+
+  <!-- Card Content -->
+  <div class="flex items-center space-x-8">
+    <!-- Profile Image -->
+    <img
+      [src]="profile.imageUrl || '/login_portal/placeholder.svg'"
+      alt="Profile Image"
+      class="w-52 h-52 rounded-full border-4 border-pink-100 shadow-md m-4"
+    />
+
+    <!-- Profile Info -->
+    <div>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-3">
+        {{ profile.fullname || "Name" }}
+      </h3>
+      <p
+        class="text-sm text-gray-500 font-medium bg-pink-100 mb-3 hover:text-pink-700 inline-block px-3 py-1 rounded-full"
+      >
+        {{ profile.membershipType || "Standard Member" }}
+      </p>
+
+      <!-- Contact Information -->
+      <div class="mt-4 space-y-2">
+        <p class="flex items-center text-gray-700">
+          <lucide-icon
+            [img]="MailIcon"
+            class="mr-2 h-5 w-5 text-pink-500 mb-2"
+          ></lucide-icon>
+          {{ profile.email || "Email not available" }}
         </p>
-  
-        <!-- Contact Information -->
-        <div class="mt-4 space-y-2">
-          <p class="flex items-center text-gray-700">
-            <lucide-icon [img]="MailIcon" class="mr-2 h-5 w-5 text-pink-500"></lucide-icon>
-            imalshawijekoon8&#64;gmail.com
-          </p>
-          <p class="flex items-center text-gray-700">
-            <lucide-icon [img]="PhoneIcon" class="mr-2 h-5 w-5 text-pink-500"></lucide-icon>
-            (555) 123-4567
-          </p>
-          <p class="flex items-center text-gray-700">
-            <lucide-icon [img]="MapPinIcons" class="mr-2 h-5 w-5 text-pink-500"></lucide-icon>
-            New York, NY
-          </p>
-        </div>
-  
+        <p class="flex items-center text-gray-700">
+          <lucide-icon
+            [img]="PhoneIcon"
+            class="mr-2 h-5 w-5 text-pink-500 mb-2"
+          ></lucide-icon>
+          {{ profile.contact || "Contact not available" }}
+        </p>
+        <p class="flex items-center text-gray-700">
+          <lucide-icon
+            [img]="HomeIcon"
+            class="mr-2 h-5 w-5 text-pink-500 mb-2"
+          ></lucide-icon>
+          {{ profile.address || "Address not available" }}
+        </p>
+      </div>
+
+      <div class="flex items-start justify-start mt-1 gap-3 ">
         <!-- Edit Profile Button -->
         <button
           type="button"
-          class="mt-6 px-6 py-2 bg-pink-600 text-white font-medium rounded-lg shadow hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-1 transition-all"
+          (click)="openEditProfileModal()"
+          class=" px-6 py-2 border border-pink-600 text-pink-600 font-normal rounded-lg hover:border-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-1 transition-all"
         >
-          Edit Profile
+          <lucide-icon [img]="Paintbrush2"></lucide-icon>
+        </button>
+
+        <!-- Delete Account Button -->
+        <button
+          type="button"
+          (click)="deleteAccount()"
+          class=" px-6 py-2 border border-red-600 text-red-600 font-medium rounded-lg shadow hover:border-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 transition-all"
+        >
+          <lucide-icon [img]="Trash2"></lucide-icon>
         </button>
       </div>
     </div>
   </div>
-  
+</div>
+
+<!-- Edit Profile Modal -->
+<div
+  *ngIf="isEditModalOpen"
+  (click)="closeEditProfileModal()"
+  class="fixed inset-0 bg-transparent bg-opacity-50 flex justify-center items-center"
+>
+  <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full relative"  (click)="$event.stopPropagation()">
+    <h2 class="text-xl font-semibold mb-4">Edit Profile</h2>
+    <lucide-icon [img]="X" class="absolute text-pink-400 top-1 right-3" (click)="closeEditProfileModal()" ></lucide-icon>
+    <form (submit)="saveProfileChanges()">
+      <div class="mb-4">
+        <label for="fullname" class="block text-gray-700">Full Name</label>
+        <input
+          type="text"
+          id="fullname"
+          [(ngModel)]="profile.fullname"
+          name="fullname"
+          class="w-full px-4 py-2 mt-2 border rounded-md"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700">Email</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="profile.email"
+          name="email"
+          class="w-full px-4 py-2 mt-2 border rounded-md"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="phone" class="block text-gray-700">Phone</label>
+        <input
+          type="text"
+          id="phone"
+          [(ngModel)]="profile.contact"
+          name="phone"
+          class="w-full px-4 py-2 mt-2 border rounded-md"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="address" class="block text-gray-700">Address</label>
+        <input
+          type="text"
+          id="address"
+          [(ngModel)]="profile.address"
+          name="address"
+          class="w-full px-4 py-2 mt-2 border rounded-md"
+        />
+      </div>
+
+      <div class="flex justify-between">
+        <button
+          type="button"
+          (click)="closeEditProfileModal()"
+          class="px-4 py-2 bg-gray-300 rounded-md"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-pink-600 text-white rounded-md"
+        >
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

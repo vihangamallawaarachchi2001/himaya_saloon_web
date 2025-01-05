@@ -7,6 +7,7 @@ import { AppointmentsComponent } from './pages/appointments/appointments.compone
 import { ChatWithExpertComponent } from './pages/chat-with-expert/chat-with-expert.component';
 import { AiHairRecommendationsComponent } from './pages/ai-hair-recommendations/ai-hair-recommendations.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 
 export const routes: Routes = [
   {
@@ -32,5 +33,9 @@ export const routes: Routes = [
       { path: 'ai', component: AiHairRecommendationsComponent },
       { path: 'products', component: ProductsComponent },
     ],
+  },
+  {
+    path: 'unautherized_access',
+    component: ForbiddenComponent
   },
 ];

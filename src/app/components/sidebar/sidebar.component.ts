@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { LucideAngularModule, Home, User, Calendar, MessageSquare, Sparkles, ShoppingBag } from 'lucide-angular';
 
 @Component({
@@ -10,12 +10,20 @@ import { LucideAngularModule, Home, User, Calendar, MessageSquare, Sparkles, Sho
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+
+  constructor(private router: Router){}
+
   readonly HomeIcons= Home;
   readonly UserIcon = User;
   readonly CalendarIcon = Calendar;
   readonly MessageSquareIcon = MessageSquare;
   readonly SparklesIcon = Sparkles;
   readonly ShoppingBagIcon = ShoppingBag;
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('/')
+  }
 
    navItems = [
     { icon: Home, label: 'Dashboard', href: '/dashboard' },

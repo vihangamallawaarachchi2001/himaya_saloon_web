@@ -28,7 +28,7 @@
   
         <!-- Card Content -->
         <div class="mt-6">
-          <form class="space-y-6">
+          <form class="space-y-6" (submit)="onSubmit()">
             <!-- Full Name Field -->
             <div class="space-y-2">
               <label
@@ -39,15 +39,16 @@
               <div class="relative">
                 <input
                   type="text"
-                  name="full-name"
+                  name="fullname"
                   id="full-name"
                   placeholder="Your Name"
                   required
+                  [(ngModel)]="formdata().fullname"
                   class="w-full border border-gray-300 rounded-lg p-3 pl-10 shadow-md focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-pink-300"
                 />
                 <span class="absolute inset-y-0 left-3 flex items-center">
                   <lucide-icon
-                    [img]="UserIcon"
+                    [img]="UserIcon" 
                     name="user"
                     class="w-5 h-5 text-gray-400"
                   ></lucide-icon>
@@ -67,6 +68,7 @@
                   id="email"
                   placeholder="m@example.com"
                   required
+                  [(ngModel)]="formdata().email"
                   class="w-full border border-gray-300 rounded-lg p-3 pl-10 shadow-md focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-pink-300"
                 />
                 <span class="absolute inset-y-0 left-3 flex items-center">
@@ -93,6 +95,7 @@
                   id="password"
                   placeholder="••••••••"
                   required
+                  [(ngModel)]="formdata().password"
                   class="w-full border border-gray-300 rounded-lg p-3 pl-10 shadow-md focus:outline-none focus:ring-1 focus:ring-pink-300 focus:border-pink-300"
                 />
                 <span class="absolute inset-y-0 left-3 flex items-center">
